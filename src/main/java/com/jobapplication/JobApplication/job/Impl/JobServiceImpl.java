@@ -5,8 +5,8 @@ import com.jobapplication.JobApplication.job.Job;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class JobServiceImpl implements IJob {
@@ -32,5 +32,20 @@ public class JobServiceImpl implements IJob {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean deleteJobById(Long id) {
+        Iterator<Job> iterator = jobs.iterator();
+
+        while (iterator.hasNext()){
+            Job job  = iterator.next();
+            if (job.getId().equals(id)){
+                iterator.remove();
+                return true;
+            }
+        }
+
+        return false;
     }
 }
