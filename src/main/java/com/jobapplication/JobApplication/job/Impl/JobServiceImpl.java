@@ -36,7 +36,13 @@ public class JobServiceImpl implements IJob {
 
     @Override
     public boolean deleteJobById(Long id) {
-        Iterator<Job> iterator = jobs.iterator();
+//        for (Job job : jobs) {
+//            if (job.getId().equals(id)){
+//                jobs.remove(job);
+//                return true;
+//            }
+//        }
+        Iterator<Job> iterator = jobs.iterator(); // This method is more efficient and appropriate
 
         while (iterator.hasNext()){
             Job job  = iterator.next();
@@ -46,6 +52,29 @@ public class JobServiceImpl implements IJob {
             }
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean updateJobById(Long id, Job updatedJob) {
+//        Iterator<Job> iterator = jobs.iterator(); More appropriate when there is a complex update
+//
+//        while (iterator.hasNext()){
+//            Job job = iterator.next();
+//            if (job.getId().equals(id)){
+//
+//            }
+//        }
+        for (Job job : jobs){
+            if (job.getId().equals(id)){
+                job.setTitle(updatedJob.getTitle());
+                job.setDescription(updatedJob.getDescription());
+                job.setMinSalary(updatedJob.getMinSalary());
+                job.setMaxSalary(updatedJob.getMaxSalary());
+                job.setLocation(updatedJob.getLocation());
+                return true;
+            }
+        }
         return false;
     }
 }
