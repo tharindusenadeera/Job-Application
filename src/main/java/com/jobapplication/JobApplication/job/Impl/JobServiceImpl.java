@@ -12,6 +12,7 @@ import java.util.Optional;
 public class JobServiceImpl implements IJob {
 
     private List<Job> jobs = new ArrayList<>();
+    private Long nextId = 1L;
     @Override
     public List<Job> findAll() {
         return jobs;
@@ -19,6 +20,7 @@ public class JobServiceImpl implements IJob {
 
     @Override
     public void createJobs(Job job) {
+        job.setId(nextId++);
         jobs.add(job);
     }
 
