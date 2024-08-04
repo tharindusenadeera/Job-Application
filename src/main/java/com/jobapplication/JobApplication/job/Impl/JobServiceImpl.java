@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobServiceImpl implements IJob {
@@ -19,5 +20,15 @@ public class JobServiceImpl implements IJob {
     @Override
     public void createJobs(Job job) {
         jobs.add(job);
+    }
+
+    @Override
+    public Job getJobById(Long id) {
+        for(Job job : jobs){
+            if (job.getId().equals(id)){
+                return job;
+            }
+        }
+        return null;
     }
 }
